@@ -75,8 +75,6 @@ class Decoder(srd.Decoder):
         self.put(ss, es, self.out_ann, [ann_data, ['%02X' % (value)]])
 
     def decode_bits(self, offset, width):
-        print("decode_bits offset=%d len=%d"%(offset,width))
-        print(self.cmdbits)
         out = 0
         for i in range(width):
             out = (out << 1) | self.cmdbits[offset + i][0]
@@ -139,7 +137,6 @@ class Decoder(srd.Decoder):
                     #self.cmdbits = []
                     self.databits = []
                 except Exception as ex:
-                    print("Exception while decoding command")
-                    print(ex)
+                    self.reset()
 
 
